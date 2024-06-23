@@ -11,7 +11,7 @@ public class Vehicle {
     private double price;
     private boolean sold;
 
-    public Vehicle() {
+    public Vehicle(String vin, String make, String modelToSearch, String vehicleTypeToSearch, String colorToSearch) {
     }
 
     public Vehicle(int vin, int year, String make, String model, String vehicleType, String color, int odometer, double price, boolean sold) {
