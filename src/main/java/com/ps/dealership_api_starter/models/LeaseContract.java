@@ -112,5 +112,6 @@ public class LeaseContract {
     }
 
     public void update(int contractId, LeaseContract leaseContract) {
+        
     }
 }
