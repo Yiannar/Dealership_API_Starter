@@ -110,4 +110,7 @@ public class LeaseContract {
     public void setMonthlyPayment(double monthlyPayment) {
         this.monthlyPayment = monthlyPayment;
     }
+
+    public void update(int contractId, LeaseContract leaseContract) {
+    }
 }
