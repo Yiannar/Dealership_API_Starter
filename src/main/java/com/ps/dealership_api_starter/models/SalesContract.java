@@ -1,5 +1,7 @@
 package com.ps.dealership_api_starter.models;
 
+import java.math.BigDecimal;
+
 public class SalesContract {
     private int contractId;
     private String contractDate;
@@ -28,6 +30,9 @@ public class SalesContract {
         this.totalPrice = totalPrice;
         this.financeOption = financeOption;
         this.monthlyPayment = monthlyPayment;
+    }
+
+    public SalesContract(int contractId, String contractDate, String customerName, String customerEmail, int vin, BigDecimal salesTax, BigDecimal recordingFee, BigDecimal processingFee, BigDecimal totalPrice, String financeOption, BigDecimal monthlyPayment) {
     }
 
     public int getContractId() {

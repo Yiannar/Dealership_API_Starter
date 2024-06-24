@@ -13,6 +13,6 @@ public interface VehicleDao {
  Vehicle create(Vehicle vehicle);
  void update(int vin, Vehicle vehicle);
  void delete(int vin);
-
+ List<Vehicle> getByCriteria(int minYear, int maxYear, int minMiles, int maxMiles, double minPrice, double maxPrice); // New method
 
 }

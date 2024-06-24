@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/vehicles")
 public class VehicleController {
 
-    private final VehicleDao vehicleDao;
+    private  VehicleDao vehicleDao;
 
     @Autowired
     public VehicleController(VehicleDao vehicleDao) {
@@ -44,6 +44,18 @@ public class VehicleController {
     @ResponseStatus(HttpStatus.CREATED)
     public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
         return vehicleDao.create(vehicle);
+    }
+
+    @GetMapping("/search")
+    public List<Vehicle> searchVehicles(
+            @RequestParam(required = false, defaultValue = "0") int minYear,
+            @RequestParam(required = false, defaultValue = "0") int maxYear,
+            @RequestParam(required = false, defaultValue = "0") int minMiles,
+            @RequestParam(required = false, defaultValue = "0") int maxMiles,
+            @RequestParam(required = false, defaultValue = "0") double minPrice,
+            @RequestParam(required = false, defaultValue = "0") double maxPrice) {
+
+        return vehicleDao.getByCriteria(minYear, maxYear, minMiles, maxMiles, minPrice, maxPrice);
     }
 
     @PutMapping("/{vin}")

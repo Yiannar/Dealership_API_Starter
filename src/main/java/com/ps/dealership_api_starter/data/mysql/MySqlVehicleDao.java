@@ -128,6 +128,47 @@ public class MySqlVehicleDao extends MySqlDaoBase implements VehicleDao {
         return vehicle;
     }
 
+    @Override
+    public List<Vehicle> getByCriteria(int minYear, int maxYear, int minMiles, int maxMiles, double minPrice, double maxPrice) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        String sql = "SELECT * FROM vehicles WHERE " +
+                "(year >= ? OR ? = 0) AND " +
+                "(year <= ? OR ? = 0) AND " +
+                "(odometer >= ? OR ? = 0) AND " +
+                "(odometer <= ? OR ? = 0) AND " +
+                "(price >= ? OR ? = 0) AND " +
+                "(price <= ? OR ? = 0)";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, minYear);
+            preparedStatement.setInt(2, minYear);
+            preparedStatement.setInt(3, maxYear);
+            preparedStatement.setInt(4, maxYear);
+            preparedStatement.setInt(5, minMiles);
+            preparedStatement.setInt(6, minMiles);
+            preparedStatement.setInt(7, maxMiles);
+            preparedStatement.setInt(8, maxMiles);
+            preparedStatement.setDouble(9, minPrice);
+            preparedStatement.setDouble(10, minPrice);
+            preparedStatement.setDouble(11, maxPrice);
+            preparedStatement.setDouble(12, maxPrice);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Vehicle vehicle = mapRow(resultSet);
+                vehicles.add(vehicle);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
+        return vehicles;
+    }
+
 
 
 
@@ -178,6 +219,8 @@ public class MySqlVehicleDao extends MySqlDaoBase implements VehicleDao {
             throw new RuntimeException(e);
         }
     }
+
+
 
     protected static Vehicle mapRow(ResultSet resultSet) throws SQLException {
         int vin = resultSet.getInt("vin");
