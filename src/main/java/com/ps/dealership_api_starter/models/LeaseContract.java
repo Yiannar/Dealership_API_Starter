@@ -28,6 +28,9 @@ public class LeaseContract {
         this.monthlyPayment = monthlyPayment;
     }
 
+    public LeaseContract(int contractId, String contractDate, String customerName, String customerEmail, int vin, String leaseStartDate, String leaseEndDate, double monthlyPayment) {
+    }
+
     public int getContractId() {
         return contractId;
     }
